@@ -30,4 +30,4 @@ jobs:
           docker-compose version
 
       - name: Run Docker Compose
-        run: docker-compose up --abort-on-container-exit --exit-code-from cypress-test-bb
+        run: docker-compose up --abort-on-container-exit --exit-code-from cypress-test-hub
