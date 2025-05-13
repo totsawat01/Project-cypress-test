@@ -8,7 +8,7 @@ services:
       - "3000:3000"
 
   cypress-test:
-    image: bigbosmt/cypress-test-hub:latest
+    image: totsawat01/cypress-test-hub:latest
     container_name: cypress-test-hub-container
     depends_on:
       - api-mock
