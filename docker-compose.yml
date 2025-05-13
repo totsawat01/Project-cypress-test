@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  api-mock:
+    image: totsawat01/api-mock-hub:latest
+    container_name: api-mock-hub-container
+    ports:
+      - "3000:3000"
+
+  cypress-test:
+    image: bigbosmt/cypress-test-hub:latest
+    container_name: cypress-test-hub-container
+    depends_on:
+      - api-mock
+    working_dir: /e2e
+    command: npx cypress run
