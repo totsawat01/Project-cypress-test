@@ -35,4 +35,10 @@ jobs:
           docker-compose version
 
       - name: Run Docker Compose
-        run: docker-compose up --abort-on-container-exit --exit-code-from cypress-test
+        run: docker-compose up --abort-on-container-exit --exit-code-from 
+        
+      - name: Upload Cypress Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-report
+          path: cypress/reports
