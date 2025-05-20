@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test-project:
+  test-project:   # job สำหรับรัน script
     runs-on: ubuntu-20.04
 
     steps:
@@ -42,3 +42,23 @@ jobs:
         with:
           name: cypress-report
           path: cypress/reports
+
+  publish-report:  # job สำหรับออก report
+    needs: test-project
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Rename report to index.html for GitHub Pages
+        run: mv cypress/reports/mochawesome.html cypress/reports/index.html
+
+      - name: Deploy Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./cypress/reports
+          publish_branch: gh-pages
+          keep_files: true
+          allow_empty_commit: false
